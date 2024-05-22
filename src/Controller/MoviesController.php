@@ -25,7 +25,7 @@ class MoviesController extends AbstractController
         $this->em = $em;
     }
 
-    #[Route('/', name: 'movies_index')]
+    #[Route('/movies', name: 'movies_index')]
     public function index(MovieRepository $movieRepository): Response
     {
         $movies = $movieRepository->findAll();

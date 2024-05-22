@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "bootstrap": "^5.3.3",
     "postcss": "^8.4.38",
     "purgecss-webpack-plugin": "^5.0.0",
     "watch": "^0.13.0",
@@ -14,6 +13,7 @@
   "devDependencies": {
     "@symfony/webpack-encore": "^4.6.1",
     "autoprefixer": "^10.4.19",
+    "bootstrap": "^5.3.3",
     "file-loader": "^6.2.0",
     "glob-all": "^3.3.1",
     "path": "^0.12.7",
