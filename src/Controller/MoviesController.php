@@ -26,14 +26,15 @@ class MoviesController extends AbstractController
     }
 
     #[Route('/movies', name: 'movies_index')]
-    public function index(MovieRepository $movieRepository): Response
+    public function index(Request $request, MovieRepository $movieRepository): Response
     {
-        $movies = $movieRepository->findAll();
-        //findAll() - SELECT * FROM movies;
-        //find() - SELECT * from movies WHERE id = 5;
-        //findBy() - SELECT * from movies ORDER BY id DESC;
-        //findOneBy() - SELECT * FROM movies WHERE id = 6 AND title = 'The Title' ORDER BY id DESC ;
-        //count() - SELECT COUNT() from movies WHERE id = 1;
+        $search = $request->query->get('search');
+        if ($search) {
+            $movies = $movieRepository->findByTitle($search);
+        } else {
+            $movies = $movieRepository->findAll();
+        }
+
         return $this->render('movies/index.html.twig', [
             'movies' => $movies,
         ]);

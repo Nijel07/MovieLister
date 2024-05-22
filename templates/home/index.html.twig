@@ -5,11 +5,64 @@
 {% block body %}
     <div class="container">
         <div class="jumbotron mt-5">
-            <h1 class="display-4">Welcome to MovieLister!</h1>
-            <p class="lead">Your number one source for all things movies.</p>
+            <h1 class="display-4 text-center mb-4">Welcome to MovieLister!</h1>
+            <p class="lead text-center">Your number one website to add your favourite movies and discover others.</p>
             <hr class="my-4">
-            <p>Explore our vast collection of movies, rate your favorites, and discover new ones!</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <p class="text-center">Explore our vast collection of movies, learn more about them, and discover new ones!</p>
+            <div class="text-center">
+                <a class="btn btn-primary btn-lg" href="/movies" role="button">Start Exploring</a>
+            </div>
+        </div>
+
+        <div class="search-bar mt-4">
+            <form action="{{ path('movies_index') }}" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Search for movies...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="latest-movies mt-5">
+            <h2>Latest Movies</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex flex-row overflow-auto">
+                        {% for movie in latestMovies %}
+                            <div class="card mr-3" style="width: 18rem;">
+                                <img src="{{ movie.imagePath }}" class="card-img-top" alt="{{ movie.title }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ movie.title }}</h5>
+                                    <p class="card-text">{{ movie.description|slice(0, 100) }}...</p>
+                                    <a href="{{ path('movies_show', {'id': movie.id}) }}" class="btn btn-primary">View</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="featured-movies mt-5">
+            <h2>Featured Movies</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex flex-row overflow-auto">
+                        {% for movie in featuredMovies %}
+                            <div class="card mr-3" style="width: 18rem;">
+                                <img src="{{ movie.imagePath }}" class="card-img-top" alt="{{ movie.title }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ movie.title }}</h5>
+                                    <p class="card-text">{{ movie.description|slice(0, 100) }}...</p>
+                                    <a href="{{ path('movies_show', {'id': movie.id}) }}" class="btn btn-primary">View</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

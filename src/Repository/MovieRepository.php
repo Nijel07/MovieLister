@@ -45,4 +45,26 @@ class MovieRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findFeaturedMovies()
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.isFeatured = :isFeatured')
+            ->setParameter('isFeatured', true)
+            ->orderBy('m.releaseDate', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByTitle($title)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.title LIKE :title')
+            ->setParameter('title', '%' . $title . '%')
+            ->orderBy('m.releaseDate', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

@@ -32,6 +32,9 @@ class Movie
     #[ORM\ManyToMany(targetEntity: Actor::class, inversedBy: 'movies')]
     private Collection $actors;
 
+    #[ORM\Column]
+    private ?bool $isFeatured = null;
+
     public function __construct()
     {
         $this->actors = new ArrayCollection();
@@ -110,6 +113,18 @@ class Movie
     public function removeActor(Actor $actor): static
     {
         $this->actors->removeElement($actor);
+
+        return $this;
+    }
+
+    public function isIsFeatured(): ?bool
+    {
+        return $this->isFeatured;
+    }
+
+    public function setIsFeatured(bool $isFeatured): static
+    {
+        $this->isFeatured = $isFeatured;
 
         return $this;
     }

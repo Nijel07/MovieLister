@@ -21,16 +21,15 @@
             {% block header %}
                 <header>
                     <nav
-                            class="flex items-center justify-between flex-wrap p-6 fixed w-full z-10 top-0"
+                            class="flex items-center justify-between flex-wrap p-3 fixed w-full z-10 top-0"
                             x-data="{ isOpen: false }"
                             @keydown.escape="isOpen = false"
                             :class="{ 'shadow-lg bg-yellow-600' : isOpen , 'bg-yellow-600' : !isOpen}">
-
-                        <div class="flex items-center flex-shrink-0 text-white mr-6">
+                        <div class="flex items-center flex-shrink-0 text-white mr-4">
                             <a
                                     class="text-white no-underline hover:text-white hover:no-underline"
                                     href="/">
-            <span class="text-2xl pl-2 font-extrabold">
+            <span class="text-lg pl-2 font-extrabold">
                 MovieLister
             </span>
                             </a>
