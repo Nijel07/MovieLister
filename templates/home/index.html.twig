@@ -26,24 +26,40 @@
         </div>
 
         <div class="latest-movies mt-5">
-            <h2>Latest Movies</h2>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="d-flex flex-row overflow-auto">
-                        {% for movie in latestMovies %}
-                            <div class="card mr-3" style="width: 18rem;">
-                                <img src="{{ movie.imagePath }}" class="card-img-top" alt="{{ movie.title }}">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ movie.title }}</h5>
-                                    <p class="card-text">{{ movie.description|slice(0, 100) }}...</p>
-                                    <a href="{{ path('movies_show', {'id': movie.id}) }}" class="btn btn-primary">View</a>
-                                </div>
+            <h2>Movies Recently Added</h2>
+            <div id="movieCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
+                <div class="carousel-inner">
+                    {% for movie in latestMovies|batch(5) %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <div class="d-flex justify-content-around">
+                                {% for item in movie %}
+                                    <div class="card mr-3" style="width: 18rem;">
+                                        <img src="{{ item.imagePath }}" class="card-img-top" alt="{{ item.title }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ item.title }}</h5>
+                                            <p class="card-text">{{ item.description|slice(0, 100) }}...</p>
+                                            <a href="{{ path('movies_show', {'id': item.id}) }}" class="btn btn-primary">View</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endfor %}
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
+
+        <!-- Add the required Bootstrap and JavaScript -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
 
         <div class="featured-movies mt-5">
             <h2>Featured Movies</h2>

@@ -19,7 +19,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        $latestMovies = $this->movieRepository->findBy([], ['releaseDate' => 'DESC'], 5);
+        $latestMovies = $this->movieRepository->findBy([], ['releaseDate' => 'DESC'], 15);
         $featuredMovies = $this->movieRepository->findFeaturedMovies();
 
         return $this->render('home/index.html.twig', [
@@ -27,4 +27,6 @@ class HomeController extends AbstractController
             'featuredMovies' => $featuredMovies,
         ]);
     }
+
+
 }
